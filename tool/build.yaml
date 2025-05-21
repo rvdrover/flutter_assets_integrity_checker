@@ -1,0 +1,7 @@
+builders:
+  masterAssetHashBuilder:
+    import: "package:flutter_assets_integrity_checker/src/tool/builder.dart"
+    builder_factories: ["masterAssetHashBuilder"]
+    build_extensions: { "$package$": [".placeholder"] }
+    auto_apply: root_package
+    build_to: cache
