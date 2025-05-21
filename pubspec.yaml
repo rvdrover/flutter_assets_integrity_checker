@@ -5,6 +5,7 @@ homepage: https://github.com/rvdrover/flutter_assets_integrity_checker
 repository: https://github.com/rvdrover/flutter_assets_integrity_checker
 issue_tracker: https://github.com/rvdrover/flutter_assets_integrity_checker/issues
 
+publish_to: none
 environment:
   sdk: ^3.7.0
   flutter: ">=1.17.0"

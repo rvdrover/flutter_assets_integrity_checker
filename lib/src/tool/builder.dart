@@ -7,13 +7,15 @@ import 'package:build/build.dart';
 import 'package:crypto/crypto.dart';
 import 'package:yaml/yaml.dart';
 
+const String outputPath = "lib/generated/master_asset_hash.dart";
+
 Builder masterAssetHashBuilder(BuilderOptions options) =>
     _AssetHashDartWriter();
 
 class _AssetHashDartWriter implements Builder {
   @override
   Map<String, List<String>> get buildExtensions => const {
-    r'$package$': ['lib/generated/master_asset_hash.dart'], // default fallback
+    r'$package$': [outputPath], // required by build_runner
   };
 
   @override
@@ -21,9 +23,6 @@ class _AssetHashDartWriter implements Builder {
     final config = _loadConfig();
     final assetDirs = config['asset_paths'].cast<String>();
     final validExtensions = config['allowed_extensions'].cast<String>();
-    final outputPath =
-        config['output_path'] as String? ??
-        'lib/generated/master_asset_hash.dart';
 
     final allFiles = <File>[];
 
