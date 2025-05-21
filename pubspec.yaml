@@ -1,7 +1,9 @@
 name: flutter_assets_integrity_checker
 description: A Flutter package to verify asset integrity using a master hash.
 version: 1.0.0
-homepage:
+homepage: https://github.com/rvdrover/flutter_assets_integrity_checker
+repository: https://github.com/rvdrover/flutter_assets_integrity_checker
+issue_tracker: https://github.com/rvdrover/flutter_assets_integrity_checker/issues
 
 environment:
   sdk: ^3.7.0

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer' as console;
 import 'dart:io';
 
 import 'package:build/build.dart';
@@ -40,7 +41,7 @@ class _NoOutputHashBuilder implements Builder {
     }
 
     final masterHash = sha256.convert(utf8.encode(buffer.toString())).toString();
-    print('🔒 [flutter_assets_integrity_checker] Master asset hash: $masterHash');
+    console.log('🔒 [flutter_assets_integrity_checker] Master asset hash: $masterHash');
   }
 
   Map<String, dynamic> _loadConfig() {
