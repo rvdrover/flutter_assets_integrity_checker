@@ -7,7 +7,8 @@ import 'package:build/build.dart';
 import 'package:crypto/crypto.dart';
 import 'package:yaml/yaml.dart';
 
-Builder masterAssetHashBuilder(BuilderOptions options) => _AssetHashDartWriter();
+Builder masterAssetHashBuilder(BuilderOptions options) =>
+    _AssetHashDartWriter();
 
 class _AssetHashDartWriter implements Builder {
   @override
@@ -20,14 +21,21 @@ class _AssetHashDartWriter implements Builder {
     final config = _loadConfig();
     final assetDirs = config['asset_paths'].cast<String>();
     final validExtensions = config['allowed_extensions'].cast<String>();
-    final outputPath = config['output_path'] as String? ?? 'lib/generated/master_asset_hash.dart';
+    final outputPath =
+        config['output_path'] as String? ??
+        'lib/generated/master_asset_hash.dart';
 
     final allFiles = <File>[];
 
     for (final dirPath in assetDirs) {
       final dir = Directory(dirPath);
       if (await dir.exists()) {
-        allFiles.addAll(dir.listSync(recursive: true).whereType<File>().where((f) => validExtensions.any((ext) => f.path.endsWith(ext))));
+        allFiles.addAll(
+          dir
+              .listSync(recursive: true)
+              .whereType<File>()
+              .where((f) => validExtensions.any((ext) => f.path.endsWith(ext))),
+        );
       }
     }
 
@@ -41,7 +49,8 @@ class _AssetHashDartWriter implements Builder {
       buffer.write('$relative:$hash;');
     }
 
-    final masterHash = sha256.convert(utf8.encode(buffer.toString())).toString();
+    final masterHash =
+        sha256.convert(utf8.encode(buffer.toString())).toString();
 
     final dartOutput = '''
 /// GENERATED FILE — DO NOT MODIFY BY HAND.

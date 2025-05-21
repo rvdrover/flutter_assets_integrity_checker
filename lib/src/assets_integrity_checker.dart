@@ -16,12 +16,18 @@ class AssetIntegrityChecker {
   /// The generated master hash from dev time.
   final String masterAssetHash;
 
-  const AssetIntegrityChecker({required this.assetPaths, required this.allowedExtensions, required this.masterAssetHash});
+  const AssetIntegrityChecker({
+    required this.assetPaths,
+    required this.allowedExtensions,
+    required this.masterAssetHash,
+  });
 
   /// Computes a master hash of all target assets in release.
   Future<String> _computeMasterHash() async {
     final assetManifestJson = await rootBundle.loadString('AssetManifest.json');
-    final assetManifest = Map<String, dynamic>.from(json.decode(assetManifestJson));
+    final assetManifest = Map<String, dynamic>.from(
+      json.decode(assetManifestJson),
+    );
 
     final assetFiles =
         assetManifest.keys

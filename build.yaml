@@ -1,3 +1,10 @@
+targets:
+  $default:
+    builders:
+      flutter_assets_integrity_checker|masterAssetHashBuilder:
+        generate_for:
+          - asset_integrity.yaml
+
 builders:
   masterAssetHashBuilder:
     import: "package:flutter_assets_integrity_checker/src/tool/builder.dart"

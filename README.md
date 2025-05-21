@@ -23,7 +23,7 @@ Add the package to your project:
 
 ```yaml
 dependencies:
-  flutter_assets_integrity_checker: ^1.0.2
+  flutter_assets_integrity_checker: ^1.0.3
 ```
 
 ---
@@ -45,6 +45,8 @@ allowed_extensions:
   - .svg
   - .webp
   - .json
+
+output_path: lib/generated/master_asset_hash.dart
 ```
 
 This YAML file tells the tool which asset folders and file types to include in the master hash.
@@ -57,7 +59,7 @@ Run the following command:
 dart run build_runner build
 ```
 
-This prints a master SHA-256 hash to the console. **Copy that hash** — it represents your asset state at dev time.
+This prints a master SHA-256 hash to the console and generate dart file also. **Copy that hash** — it represents your asset state at dev time.
 
 > 💡 Only use this hash in production builds. Regenerate it when assets change.
 
