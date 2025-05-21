@@ -23,7 +23,7 @@ Add the package to your project:
 
 ```yaml
 dependencies:
-  flutter_assets_integrity_checker: ^1.0.1
+  flutter_assets_integrity_checker: ^1.0.2
 ```
 
 ---
@@ -54,7 +54,7 @@ This YAML file tells the tool which asset folders and file types to include in t
 Run the following command:
 
 ```bash
-flutter pub run build_runner build
+dart run build_runner build
 ```
 
 This prints a master SHA-256 hash to the console. **Copy that hash** — it represents your asset state at dev time.

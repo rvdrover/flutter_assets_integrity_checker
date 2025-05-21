@@ -1,3 +1,7 @@
+## 1.0.2
+
+- ✅ Automatically **generates `asset_master_hash.dart`** via `build_runner` with the dev-time master hash.
+
 ## 1.0.1
 
 - ✅ Added Example implementation

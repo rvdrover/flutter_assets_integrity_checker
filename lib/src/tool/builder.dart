@@ -1,18 +1,18 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:convert';
 import 'dart:developer' as console;
-import 'dart:io';
 
 import 'package:build/build.dart';
 import 'package:crypto/crypto.dart';
 import 'package:yaml/yaml.dart';
 
-Builder masterAssetHashBuilder(BuilderOptions options) => _NoOutputHashBuilder();
+Builder masterAssetHashBuilder(BuilderOptions options) => _AssetHashDartWriter();
 
-class _NoOutputHashBuilder implements Builder {
+class _AssetHashDartWriter implements Builder {
   @override
-  final buildExtensions = const {
-    r'$package$': ['.placeholder'], // won't be used
+  Map<String, List<String>> get buildExtensions => const {
+    r'$package$': ['lib/generated/master_asset_hash.dart'], // default fallback
   };
 
   @override
@@ -20,6 +20,7 @@ class _NoOutputHashBuilder implements Builder {
     final config = _loadConfig();
     final assetDirs = config['asset_paths'].cast<String>();
     final validExtensions = config['allowed_extensions'].cast<String>();
+    final outputPath = config['output_path'] as String? ?? 'lib/generated/master_asset_hash.dart';
 
     final allFiles = <File>[];
 
@@ -41,7 +42,19 @@ class _NoOutputHashBuilder implements Builder {
     }
 
     final masterHash = sha256.convert(utf8.encode(buffer.toString())).toString();
-    console.log('🔒 [flutter_assets_integrity_checker] Master asset hash: $masterHash');
+
+    final dartOutput = '''
+/// GENERATED FILE — DO NOT MODIFY BY HAND.
+/// Master hash of all verified assets.
+const String kMasterAssetHash = '$masterHash';
+''';
+
+    final outputId = AssetId(buildStep.inputId.package, outputPath);
+
+    await buildStep.writeAsString(outputId, dartOutput);
+
+    console.log('✅ [flutter_assets_integrity_checker] Generated: $outputPath');
+    console.log('🔐 Master Asset Hash: $masterHash');
   }
 
   Map<String, dynamic> _loadConfig() {
