@@ -23,7 +23,7 @@ Add the package to your project:
 
 ```yaml
 dependencies:
-  flutter_assets_integrity_checker: ^1.0.0
+  flutter_assets_integrity_checker: ^1.0.1
 ```
 
 ---

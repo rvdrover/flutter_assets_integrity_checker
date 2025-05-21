@@ -1,3 +1,7 @@
+## 1.0.1
+
+- ✅ Added Example implementation
+
 ## 1.0.0
 
 ### 🎉 Initial Release
